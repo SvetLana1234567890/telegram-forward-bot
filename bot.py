@@ -35,4 +35,4 @@ app.add_handler(
 print("Bot started...")
 
 app.run_polling()
-print(update.effective_chat.id)
+print("CHAT ID:", update.effective_chat.id)
