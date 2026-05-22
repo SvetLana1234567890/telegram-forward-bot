@@ -43,3 +43,5 @@ print("Bot started...")
 
 app.run_polling()
 print("CHAT ID:", update.effective_chat.id)
+
+print(update.effective_message.to_dict())
