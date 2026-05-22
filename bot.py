@@ -3,7 +3,7 @@ from telegram.ext import ApplicationBuilder, MessageHandler, filters, ContextTyp
 import os
 
 TOKEN = "8689968489:AAFr9p2oQuFo3e79JinPdk7FTAvspwUQL5E"
-TARGET_CHAT_ID = "-5103853856"
+TARGET_CHAT_ID = -5103853856
 
 
 async def forward_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -15,11 +15,7 @@ async def forward_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     source_chat = update.effective_chat.title
 
-    text = (
-        message.text
-        or message.caption
-        or ""
-    )
+    text = str(message)
 
     # якщо тексту немає — беремо JSON-опис
     if not text:
