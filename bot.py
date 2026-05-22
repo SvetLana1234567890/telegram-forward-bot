@@ -42,7 +42,6 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
 app = ApplicationBuilder().token(TOKEN).build()
 
 app.add_handler(MessageHandler(filters.ALL, forward_message))
-app.add_handler(CallbackQueryHandler(handle_callback))
 
 print("Bot started...")
 
