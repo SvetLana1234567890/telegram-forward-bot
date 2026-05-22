@@ -29,7 +29,7 @@ async def forward_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 app = ApplicationBuilder().token(TOKEN).build()
 
 app.add_handler(
-    MessageHandler(filters.TEXT & ~filters.COMMAND, forward_message)
+    MessageHandler(filters.ALL, forward_message)
 )
 
 print("Bot started...")
