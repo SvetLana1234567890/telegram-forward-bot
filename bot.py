@@ -1,4 +1,12 @@
 from telegram.ext import TypeHandler
+from telegram import Update
+from telegram.ext import (
+    ApplicationBuilder,
+    MessageHandler,
+    CallbackQueryHandler,
+    filters,
+    ContextTypes
+)
 
 async def forward_all(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
