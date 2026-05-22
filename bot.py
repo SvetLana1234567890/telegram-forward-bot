@@ -1,7 +1,6 @@
 from telegram import Update
 from telegram.ext import ApplicationBuilder, MessageHandler, filters, ContextTypes
 import os
-from telegram.ext import ChannelPostHandler
 
 TOKEN = "8689968489:AAFr9p2oQuFo3e79JinPdk7FTAvspwUQL5E"
 TARGET_CHAT_ID = -5103853856
@@ -37,7 +36,7 @@ async def forward_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 app = ApplicationBuilder().token(TOKEN).build()
 
 app.add_handler(MessageHandler(filters.ALL, forward_message))
-app.add_handler(ChannelPostHandler(forward_message))
+app.add_handler(MessageHandler(filters.UpdateType.CHANNEL_POST, forward_message))
 
 print("Bot started...")
 
