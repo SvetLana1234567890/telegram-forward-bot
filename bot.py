@@ -13,22 +13,19 @@ TARGET_CHAT_ID = -5103853856
 
 async def forward_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
-    message = update.effective_message
-    if not message:
+    msg = update.message or update.edited_message or update.channel_post
+
+    if not msg:
         return
 
-    source = update.effective_chat.title or "Unknown"
+    text = getattr(msg, "text", None) or getattr(msg, "caption", None)
 
-    text = (
-        message.text
-        or message.caption
-        or (message.to_dict().get("text"))
-        or str(message)
-    )
+    if not text:
+        text = str(msg)
 
     await context.bot.send_message(
         chat_id=TARGET_CHAT_ID,
-        text=f"🏪 {source}\n\n{text}"
+        text=f"🏪 {update.effective_chat.title}\n\n{text}"
     )
 
 
