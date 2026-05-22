@@ -8,6 +8,9 @@ from telegram.ext import (
     ContextTypes
 )
 
+TOKEN = "8689968489:AAFr9p2oQuFo3e79JinPdk7FTAvspwUQL5E"
+TARGET_CHAT_ID = -5103853856
+
 async def forward_all(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     msg = update.message or update.channel_post or update.edited_message
