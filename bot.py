@@ -13,20 +13,24 @@ TARGET_CHAT_ID = -5103853856
 
 async def forward_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
-    print("\n========== RAW UPDATE ==========\n")
-    print(update.to_dict())
-    print("\n================================\n")
+    msg = (
+        update.message
+        or update.edited_message
+        or update.channel_post
+    )
 
-    message = update.effective_message
-
-    if not message:
+    if not msg:
         return
 
-    text = message.text or message.caption or str(message.to_dict())
+    text = msg.text or msg.caption or ""
+
+    # fallback для forwarded bot messages
+    if not text:
+        text = str(msg.to_dict())
 
     await context.bot.send_message(
         chat_id=TARGET_CHAT_ID,
-        text=text
+        text=f"🏪 {msg.chat.title}\n\n{text}"
     )
 
 
