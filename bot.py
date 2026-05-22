@@ -8,25 +8,28 @@ TARGET_CHAT_ID = "-5103853856"
 
 async def forward_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
-    if not update.message:
-        return
+    message = update.effective_message
 
-    # Не пересилати повідомлення з цільової групи
-    if update.effective_chat.id == TARGET_CHAT_ID:
+    if not message:
         return
 
     source_chat = update.effective_chat.title
+
     text = (
-        update.message.text
-        or update.message.caption
-        or "📦 Нове замовлення (без тексту)"
+        message.text
+        or message.caption
+        or ""
     )
 
-    message = f"🏪 Магазин: {source_chat}\n\n{text}"
+    # якщо тексту немає — беремо JSON-опис
+    if not text:
+        text = str(message.to_dict())
+
+    new_text = f"🏪 Магазин: {source_chat}\n\n{text}"
 
     await context.bot.send_message(
         chat_id=TARGET_CHAT_ID,
-        text=message
+        text=new_text
     )
 
 
