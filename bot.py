@@ -16,7 +16,11 @@ async def forward_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
 
     source_chat = update.effective_chat.title
-    text = update.message.text or ""
+    text = (
+        update.message.text
+        or update.message.caption
+        or "📦 Нове замовлення (без тексту)"
+    )
 
     message = f"🏪 Магазин: {source_chat}\n\n{text}"
 
