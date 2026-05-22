@@ -13,6 +13,10 @@ TARGET_CHAT_ID = -5103853856
 
 async def forward_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
+     print("\n========== RAW UPDATE ==========\n")
+    print(update.to_dict())
+    print("\n================================\n")
+
     msg = update.message or update.edited_message or update.channel_post
 
     if not msg:
