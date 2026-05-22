@@ -13,19 +13,14 @@ async def forward_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not message:
         return
 
-    source_chat = update.effective_chat.title
+    text = message.text or message.caption
 
-    text = str(message)
-
-    # якщо тексту немає — беремо JSON-опис
     if not text:
-        text = str(message.to_dict())
-
-    new_text = f"🏪 Магазин: {source_chat}\n\n{text}"
+        return
 
     await context.bot.send_message(
         chat_id=TARGET_CHAT_ID,
-        text=new_text
+        text=f"🏪 {update.effective_chat.title}\n\n{text}"
     )
 
 
@@ -38,6 +33,4 @@ app.add_handler(
 print("Bot started...")
 
 app.run_polling()
-print("CHAT ID:", update.effective_chat.id)
 
-print(update.effective_message.to_dict())
