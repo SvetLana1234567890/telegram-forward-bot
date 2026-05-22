@@ -13,33 +13,20 @@ TARGET_CHAT_ID = -5103853856
 
 async def forward_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
-     print("\n========== RAW UPDATE ==========\n")
+    print("\n========== RAW UPDATE ==========\n")
     print(update.to_dict())
     print("\n================================\n")
 
-    msg = update.message or update.edited_message or update.channel_post
+    message = update.effective_message
 
-    if not msg:
+    if not message:
         return
 
-    text = getattr(msg, "text", None) or getattr(msg, "caption", None)
-
-    if not text:
-        text = str(msg)
+    text = message.text or message.caption or str(message.to_dict())
 
     await context.bot.send_message(
         chat_id=TARGET_CHAT_ID,
-        text=f"🏪 {update.effective_chat.title}\n\n{text}"
-    )
-
-
-async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    query = update.callback_query
-    await query.answer()
-
-    await context.bot.send_message(
-        chat_id=TARGET_CHAT_ID,
-        text=f"🔘 Callback: {query.data}"
+        text=text
     )
 
 
